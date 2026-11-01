@@ -1,0 +1,7 @@
+{
+  "name": "ScribeAI",
+  "description": "Free AI video and audio transcription tool powered by Gemini Flash",
+  "requestFramePermissions": ["MICROPHONE"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

@@ -1,0 +1,101 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User account profile and subscription usage quota",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "photoURL": { "type": "string", "maxLength": 512 },
+        "plan": { "type": "string", "enum": ["free", "pro", "business"] },
+        "transcriptionMinutesUsed": { "type": "number" },
+        "transcriptionMinutesLimit": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "plan", "transcriptionMinutesUsed", "transcriptionMinutesLimit"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Video and audio transcription project record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "ownerId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "sourceType": { "type": "string", "enum": ["upload", "youtube", "record"] },
+        "fileName": { "type": "string", "maxLength": 256 },
+        "fileSize": { "type": "number" },
+        "fileFormat": { "type": "string", "maxLength": 32 },
+        "mediaUrl": { "type": "string", "maxLength": 2048 },
+        "duration": { "type": "string", "maxLength": 32 },
+        "durationSeconds": { "type": "number" },
+        "sourceLanguage": { "type": "string", "maxLength": 64 },
+        "status": { "type": "string", "enum": ["uploaded", "queued", "processing", "completed", "failed", "cancelled"] },
+        "progressStage": { "type": "string", "maxLength": 128 },
+        "error": { "type": "string", "maxLength": 1024 },
+        "fullText": { "type": "string" },
+        "noteMode": { "type": "string", "maxLength": 64 },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "ownerId", "title", "sourceType", "status", "createdAt"]
+    },
+    "Job": {
+      "title": "Job",
+      "description": "Transcription job processing pipeline queue record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "projectId": { "type": "string", "maxLength": 128 },
+        "ownerId": { "type": "string", "maxLength": 128 },
+        "status": { "type": "string", "enum": ["uploaded", "queued", "processing", "completed", "failed", "cancelled"] },
+        "stage": { "type": "string", "maxLength": 128 },
+        "progress": { "type": "number" },
+        "attempts": { "type": "number" },
+        "error": { "type": "string", "maxLength": 1024 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "projectId", "ownerId", "status", "createdAt"]
+    },
+    "Segment": {
+      "title": "Segment",
+      "description": "Individual speech segment with timing and speaker label",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "projectId": { "type": "string", "maxLength": 128 },
+        "start": { "type": "string", "maxLength": 32 },
+        "end": { "type": "string", "maxLength": 32 },
+        "startMs": { "type": "number" },
+        "endMs": { "type": "number" },
+        "speaker": { "type": "string", "maxLength": 64 },
+        "text": { "type": "string", "maxLength": 4096 },
+        "order": { "type": "number" }
+      },
+      "required": ["id", "projectId", "start", "end", "speaker", "text", "order"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Private user profile and usage limits"
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Transcription projects owned by authenticated users"
+    },
+    "/projects/{projectId}/segments/{segmentId}": {
+      "schema": "Segment",
+      "description": "Individual timed subtitle speech segments of a transcription project"
+    },
+    "/jobs/{jobId}": {
+      "schema": "Job",
+      "description": "Asynchronous transcription processing jobs"
+    }
+  }
+}

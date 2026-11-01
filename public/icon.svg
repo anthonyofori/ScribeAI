@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080e1a" />
+      <stop offset="100%" stop-color="#0e1726" />
+    </linearGradient>
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#14b8a6" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#bg-grad)" stroke="#1e293b" stroke-width="8" />
+
+  <!-- Cyan Glow Circle -->
+  <circle cx="256" cy="256" r="140" fill="#06b6d4" opacity="0.15" filter="url(#glow)" />
+
+  <!-- Waveform Audio & Transcription Sparkle Icon -->
+  <g transform="translate(256, 256)" filter="url(#glow)">
+    <!-- Dynamic soundwave bars -->
+    <rect x="-140" y="-36" width="16" height="72" rx="8" fill="url(#accent-grad)" />
+    <rect x="-105" y="-60" width="16" height="120" rx="8" fill="url(#accent-grad)" />
+    <rect x="-70" y="-95" width="16" height="190" rx="8" fill="url(#accent-grad)" />
+    <rect x="-35" y="-130" width="16" height="260" rx="8" fill="url(#accent-grad)" />
+    <rect x="0" y="-150" width="16" height="300" rx="8" fill="#38bdf8" />
+    <rect x="35" y="-120" width="16" height="240" rx="8" fill="url(#accent-grad)" />
+    <rect x="70" y="-85" width="16" height="170" rx="8" fill="url(#accent-grad)" />
+    <rect x="105" y="-50" width="16" height="100" rx="8" fill="url(#accent-grad)" />
+    <rect x="140" y="-28" width="16" height="56" rx="8" fill="url(#accent-grad)" />
+  </g>
+
+  <!-- AI Pulse Ring -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#06b6d4" stroke-width="3" stroke-dasharray="8 12" opacity="0.4" />
+</svg>
